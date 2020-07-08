@@ -1,3 +1,5 @@
+let playerTurn = "X";
+
 // GRAB BOXES
 const boxes = document.querySelectorAll(".box");
 console.log(boxes);
@@ -10,4 +12,12 @@ boxes.forEach((box) => {
 // CREATE EVENT LISTENER
 function boxEventListener() {
   console.log(this);
+
+  this.innerHTML = playerTurn;
+
+  if (playerTurn === "X") {
+    playerTurn = "O";
+  } else {
+    playerTurn = "X";
+  }
 }
