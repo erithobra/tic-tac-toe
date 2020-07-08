@@ -3,10 +3,26 @@ let moves = ["", "", "", "", "", "", "", "", ""];
 
 // GRAB BOXES
 const boxes = document.querySelectorAll(".box");
+const resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", resetGame);
+
+function resetGame() {
+  moves = ["", "", "", "", "", "", "", "", ""];
+  playerTurn = "X";
+
+  boxes.forEach((box) => {
+    box.innerHTML = "";
+    box.removeEventListener("click", boxEventListener);
+    box.addEventListener("click", boxEventListener, { once: true });
+  });
+
+  console.log("reset");
+}
 
 // ADD EVENT LISTENER, FOR EACH LOOP
 boxes.forEach((box) => {
-  box.addEventListener("click", boxEventListener);
+  box.addEventListener("click", boxEventListener, { once: true });
 });
 
 // CREATE EVENT LISTENER
