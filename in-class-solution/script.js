@@ -1,8 +1,8 @@
 let playerTurn = "X";
+let moves = ["", "", "", "", "", "", "", "", ""];
 
 // GRAB BOXES
 const boxes = document.querySelectorAll(".box");
-console.log(boxes);
 
 // ADD EVENT LISTENER, FOR EACH LOOP
 boxes.forEach((box) => {
@@ -11,7 +11,8 @@ boxes.forEach((box) => {
 
 // CREATE EVENT LISTENER
 function boxEventListener() {
-  console.log(this);
+  moves[this.id] = playerTurn;
+  console.log(moves);
 
   this.innerHTML = playerTurn;
 
