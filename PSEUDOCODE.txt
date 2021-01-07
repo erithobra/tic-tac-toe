@@ -1,0 +1,7 @@
+BUILD 3X3 grid
+MAKE squares CLICKABLE -- addEventListener
+UPDATE background color to blue or red.
+CREATE reset BUTTON
+
+Bonus:
+CREATE player indicator
