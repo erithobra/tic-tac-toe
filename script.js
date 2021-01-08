@@ -19,7 +19,6 @@ for (let i=0; i<gridSize; i++) {
 // determines if square color should change or remain the same
 for (let i=0; i<gridSize; i++) {
     const oneSquare = document.getElementById(`${i+1}`);
-    //console.log(oneSquare);
     oneSquare.addEventListener("click", function(e) {
         if (oneSquare.style.background == "red" || oneSquare.style.background == "blue"){
             oneSquare.style.background = oneSquare.style.background;
@@ -28,56 +27,62 @@ for (let i=0; i<gridSize; i++) {
         oneSquare.style.background = squareColor;
         }
         
-       const s1 = (document.getElementById("1").style.background);
-       const s2 = (document.getElementById("2").style.background);
-       const s3 = (document.getElementById("3").style.background);
-       const s4 = (document.getElementById("4").style.background);
-       const s5 = (document.getElementById("5").style.background);
-       const s6 = (document.getElementById("6").style.background);
-       const s7 = (document.getElementById("7").style.background);
-       const s8 = (document.getElementById("8").style.background);
-       const s9 = (document.getElementById("9").style.background);
+        // variables for shortened reference to square background colors
+        const s1 = (document.getElementById("1").style.background);
+        const s2 = (document.getElementById("2").style.background);
+        const s3 = (document.getElementById("3").style.background);
+        const s4 = (document.getElementById("4").style.background);
+        const s5 = (document.getElementById("5").style.background);
+        const s6 = (document.getElementById("6").style.background);
+        const s7 = (document.getElementById("7").style.background);
+        const s8 = (document.getElementById("8").style.background);
+        const s9 = (document.getElementById("9").style.background);
+
+        // variable for shortened reference to "game ending" HTML
+        const gameResults = document.querySelector(".gameResults");
        
-
-       if (s1 == s2 && s1 == s3 && s1 !== "") {
-           console.log("they match");
+        // setting winningPlayer value to player who just finished turn.
+        let winningPlayer;
+        if (turnCount % 2 == 0) {
+           winningPlayer = " 1 (RED)";
+        } else {winningPlayer = " 2 (BLUE)";}
+       
+        //if statements for winning conditions (or tie)
+        if (s1 == s2 && s1 == s3 && s1 !== "") {
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s4 == s5 && s4 == s6 && s4 !== "") {
-        console.log("they match2");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s7 == s8 && s7 == s9 && s7 !== "") {
-        console.log("they match3");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s1 == s4 && s1 == s7 && s1 !== "") {
-            console.log("they match4");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s2 == s5 && s2 == s8 && s2 !== "") {
-            console.log("they match5");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s3 == s6 && s3 == s9 && s3 !== "") {
-            console.log("they match6");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s1 == s5 && s1 == s9 && s1 !== "") {
-            console.log("they match7");
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
         } else if (s3 == s5 && s3 == s7 && s3 !== "") {
-            console.log("they match8");
-        }        
-
-
-        // for (let j=0; j<gridSize; j++) {
-        //     const s1 = document.getElementById("1").style.background;
-        //     const s2 = document.getElementById("2").style.background;
-        //     const s3 = document.getElementById("3").style.background;
-        //     const s4 = document.getElementById("4").style.background;
-        //     const s5 = document.getElementById("5").style.background;
-        //     const s6 = document.getElementById("6").style.background;
-        //     const s7 = document.getElementById("7").style.background;
-        //     const s8 = document.getElementById("8").style.background;
-        //     const s9 = document.getElementById("9").style.background;
-            
-        //     if (s1 == s2 && s1 == s3 && s1.value !== "") {
-        //         console.log("winner!!");
-        //         console.log(s1.value);
-        //     } else if (s4 == s5 && s4 == s6 && s4.value !== "") {
-        //         console.log("winner222222");
-        //     }
-        //     console.log(document.getElementById(`${j+1}`).style.background);
-        // }
+            gameResults.innerHTML = `Player${winningPlayer} is the winner!`;
+            endGame();
+        } else if (s1 !== "" && s2 !== "" && s3 !== "" && s4 !== "" && s5 !== "" && s6 !== "" && s7 !== "" && s8 !== "" && s9 !== ""){
+            gameResults.innerHTML = `The game is a TIE!!`;
+            endGame();
+        }
     })
+}
+
+// end game function to prevent further play once game is complete
+function endGame() {
+    const grabber = document.querySelector(".gameBoard");
+    grabber.style.pointerEvents = "none";
 }
 
 // adds event listener to game board to determine which player is taking turn
@@ -97,37 +102,12 @@ gameBoard.addEventListener("click", function(e) {
 const resetButton = document.querySelector(".resetButton");
 resetButton.addEventListener("click", function(e) {
     document.getElementById("playerTurn").innerHTML = "Player 1 (RED)";
+    document.querySelector(".gameResults").innerHTML = "";
+    const grabber = document.querySelector(".gameBoard");
+    grabber.style.pointerEvents = "auto";
     turnCount = 0;
     squareColor = "red";
     for (let i=0; i<gridSize; i++) {
         document.getElementById(`${i+1}`).style.background = "";
     }
 })
-
-
-// win conditions
-
-
-// winArray = [
-//     if (document.getElementById("1").style.background == document.getElementById("2").style.background && document.getElementById("1").style.background !== "gray"){}
-// ]
-
-// console.log(winArray[0]);
-
-/*
-
-1  2  3
-4  5  6
-7  8  9
-
-winning combinations:
-123
-456
-789
-147
-258
-369
-159
-357
-
-*/
